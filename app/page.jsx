@@ -111,11 +111,11 @@ function HeroCarousel({ founders = [] }) {
       </div>
 
       {/* Main Content */}
-      <div className="relative max-w-7xl mx-auto px-4 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <h1 className="text-4xl md:text-6xl min-h-28 flex items-center flex-col justify-center  font-bold text-white mb-4 leading-tight">
             <span className="text-transparent bg-clip-text bg-linear-to-r  p-1 from-amber-300 to-yellow-300">
@@ -139,7 +139,7 @@ function HeroCarousel({ founders = [] }) {
               transition={{ duration: 0.5 }}
               className="bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden border border-white/20 shadow-2xl"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
                 {/* Image Section */}
                 <div className="relative">
                   <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden border-4 border-white/30 shadow-2xl">
@@ -186,14 +186,14 @@ function HeroCarousel({ founders = [] }) {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
+            className="absolute left-0 top-[38%] -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
             aria-label="पिछली स्लाइड"
           >
             ‹
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
+            className="absolute right-0 top-[38%] -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl"
             aria-label="अगली स्लाइड"
           >
             ›

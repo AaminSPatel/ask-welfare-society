@@ -158,7 +158,7 @@ const FounderCarousel = () => {
   const currentFounder = founders[currentIndex];
 
   return (
-     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-green-50 py-20 px-4">
+     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-green-50 py-10 px-4">
           <div className="max-w-7xl mx-auto">
             {/* हेडर */}
             <motion.div
@@ -224,7 +224,7 @@ const FounderCarousel = () => {
                         </h2>
                         <FaQuoteRight className="text-amber-500 ml-2" />
                       </div>
-                      <div className="bg-linear-r from-emerald-50 to-green-50 p-4 rounded-xl border-l-4 border-amber-500">
+                      <div className="bg-linear-r from-emerald-50 to-green-50 p-4 rounded-sm border-l-4 border-amber-500">
                         <p className="text-emerald-800 leading-relaxed">
                           {currentFounder.description}
                         </p>
