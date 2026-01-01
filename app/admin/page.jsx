@@ -14,18 +14,28 @@ export default function AdminDashboard() {
   const [statsLoaded, setStatsLoaded] = useState(false)
 
   const fetchStats = useCallback(async () => {
-    await Promise.all([
-      fetchExams(),
-      fetchCandidates(),
-      fetchResults(),
-    ])
-    setStatsLoaded(true)
-  }, [])
+    try {
+      await Promise.all([
+        fetchExams(),
+        fetchCandidates(),
+        fetchResults(),
+      ])
+    } catch (error) {
+      console.error('Error fetching stats:', error)
+    } finally {
+      setStatsLoaded(true)
+    }
+  }, [fetchExams, fetchCandidates, fetchResults])
 
   // Use the admin auth hook for authentication checking
-  const { authChecked, isAuthorized } = useAdminAuth({
-    onAuthSuccess: fetchStats
-  })
+  const { authChecked, isAuthorized } = useAdminAuth()
+
+  // Fetch stats when authentication is confirmed
+  useEffect(() => {
+    if (authChecked && isAuthorized && !statsLoaded) {
+      fetchStats()
+    }
+  }, [authChecked, isAuthorized, statsLoaded, fetchStats])
 
   const stats = {
     totalExams: exams?.length || 0,

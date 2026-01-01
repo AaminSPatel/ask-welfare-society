@@ -1,39 +1,19 @@
-# Admin Authentication System - COMPLETED
+# Fix Candidates and Results Page Data Loading Issue on Refresh
 
 ## Problem
-Admin users were being redirected to login page on refresh due to inconsistent auth checking across admin pages.
+- fetchCandidates() and fetchResults() functions are called before authentication token is properly set in axios headers
+- This causes API calls to fail on page refresh
 
-## Root Cause
-- Admin pages had manual auth checking logic with inconsistent useEffect dependencies
-- Some pages used `loading` instead of `isInitialized` to wait for context initialization
-- Missing `router` in dependency arrays causing stale closures
-- Code duplication across admin pages
+## Solution Steps
+- [ ] Update askContext.js to ensure user state is loaded AND token is set in axios headers BEFORE any API calls can be made
+- [ ] Add console logs to debug token loading sequence on refresh
+- [ ] Update candidates page to wait for both authChecked AND user token validation before attempting to fetch data
+- [ ] Update results page to wait for both authChecked AND user token validation before attempting to fetch data
+- [ ] Add check that ensures axios Authorization header is present before making API calls
+- [ ] Test the fix by refreshing the pages
 
-## Solution
-- Created a centralized `useAdminAuth` hook for consistent auth checking
-- Updated all admin pages to use the new auth hook
-- Ensured all pages wait for `isInitialized` before checking auth
-- Updated session expiry to 15 days as requested
-
-## Changes Made
-- [x] Created `ask/lib/useAdminAuth.js` - Centralized admin auth hook
-- [x] Updated admin/page.jsx to use `useAdminAuth` hook
-- [x] Updated admin/exams/page.jsx to use `useAdminAuth` hook
-- [x] Updated admin/results/page.jsx to use `useAdminAuth` hook
-- [x] Updated admin/candidates/page.jsx to use `useAdminAuth` hook
-- [x] Updated admin login/signup expiry to 15 days
-- [x] Added `isInitialized` state to context for proper initialization tracking
-
-## Features of useAdminAuth Hook
-- Configurable auth requirements (requireAuth, requireAdmin)
-- Automatic redirect handling
-- Callback support for auth success/failure
-- Loading state management
-- Consistent behavior across all admin pages
-
-## Testing Required
-- [ ] Test admin login and verify session persists for 15 days
-- [ ] Test page refresh on all admin pages - should stay logged in
-- [ ] Test logout functionality still works
-- [ ] Test navigation between admin pages without redirects
-- [ ] Test that unauthenticated users are properly redirected
+## Files to Modify
+- ask/lib/askContext.js
+- ask/app/admin/candidates/page.jsx
+- ask/app/admin/results/page.jsx
+- ask/components/admin/ResultsManager.jsx

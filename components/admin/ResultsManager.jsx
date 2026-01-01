@@ -12,12 +12,17 @@ export default function ResultsManager() {
   const [isPublishing, setIsPublishing] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
-  const { results, fetchResults, publishResults, loading , user } = useAsk()
+  const { results, fetchResults, publishResults, loading, user, isInitialized } = useAsk()
 
   useEffect(() => {
-    if(!results.length) return
-    fetchResults()
-  }, [results, user])
+    // Only fetch results if user is initialized, has token, and results array is empty
+    if (isInitialized && user?.token && !results.length) {
+      console.log('📊 ResultsManager: User initialized with token, fetching results...');
+      fetchResults().catch(error => {
+        console.error('Failed to fetch results:', error);
+      });
+    }
+  }, [isInitialized, user?.token, results.length, fetchResults])
 
   // Check screen size for responsive design
   useEffect(() => {

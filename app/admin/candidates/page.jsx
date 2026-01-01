@@ -10,7 +10,7 @@ import { useAdminAuth } from "@/lib/useAdminAuth"
 
 export default function AdminCandidatesPage() {
   const router = useRouter()
-  const { candidates, fetchCandidates } = useAsk()
+  const { candidates, fetchCandidates, isInitialized, user } = useAsk()
   const [loading, setLoading] = useState(false)
   const [filter, setFilter] = useState("all")
   const [viewMode, setViewMode] = useState("table")
@@ -25,12 +25,17 @@ export default function AdminCandidatesPage() {
   }, [])
 
   // Use the admin auth hook for authentication checking
-  const { authChecked, isAuthorized } = useAdminAuth({
-    onAuthSuccess: () => {
-      setLoading(true)
-      fetchCandidates().finally(() => setLoading(false))
+  const { authChecked, isAuthorized } = useAdminAuth()
+
+  // Fetch candidates when user is initialized and has token
+  useEffect(() => {
+    if (isInitialized && user?.token && authChecked && isAuthorized) {
+      console.log('👥 Candidates page: User initialized with token, fetching candidates...');
+      fetchCandidates().catch(error => {
+        console.error('Failed to fetch candidates:', error);
+      });
     }
-  })
+  }, [isInitialized, user?.token, authChecked, isAuthorized, fetchCandidates]);
 
   const filteredCandidates = filter === "all" 
     ? candidates 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useAsk } from "@/lib/askContext"
+import { useAdminAuth } from "@/lib/useAdminAuth"
 
 export default function ExamManager() {
   const [showForm, setShowForm] = useState(false)
@@ -24,6 +25,7 @@ export default function ExamManager() {
   const [isMobile, setIsMobile] = useState(false)
 
   const { exams, fetchExams, createExam, updateExam, addExamQuestions, loading, user } = useAsk()
+  const { isAuthorized } = useAdminAuth()
 
   // Check screen size for responsive design
   useEffect(() => {
@@ -33,10 +35,12 @@ export default function ExamManager() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  // Fetch exams when component mounts and user is authorized
   useEffect(() => {
-    if (!user || user.role !== "admin") return;
-    fetchExams();
-  }, [user]);
+    if (isAuthorized) {
+      fetchExams();
+    }
+  }, [isAuthorized, fetchExams]);
 
   async function handleCreateExam(e) {
     e.preventDefault()
@@ -130,7 +134,7 @@ export default function ExamManager() {
     }
   }
 
-  if (loading) {
+  if (loading && exams.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
