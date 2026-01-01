@@ -34,7 +34,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-green-50 max-w-screen overflow-hidden">
       <Navigation />
       <HeroCarousel founders={founders} />
       <FounderCarousel founders={founders} />
