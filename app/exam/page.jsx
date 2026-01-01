@@ -366,6 +366,19 @@ export default function ExamPage() {
           </div>
         </div>
       </div>
+   <div 
+  style={{ 
+    display: 'flex', 
+    alignItems: 'center', 
+    padding: '0.5rem', 
+    justifyContent: 'center', 
+    color: '#fd845f', 
+    fontWeight: '600', 
+    fontSize: '1.06rem' 
+  }}
+>
+  Ahle Sarzami Khidmat-E-Kaum Welfare Society
+</div>
     </div>
 
     {/* ================= ACTIONS (NOT IN SCREENSHOT) ================= */}
