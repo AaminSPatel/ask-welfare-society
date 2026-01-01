@@ -1,9 +1,12 @@
 "use client"
 
+export const dynamic = 'force-dynamic'
+
 import { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import AdminHeader from "@/components/admin/AdminHeader"
 import { useAsk } from "@/lib/askContext"
+import { useAdminAuth } from "@/lib/useAdminAuth"
 
 export default function AdminDashboard() {
   const router = useRouter()
