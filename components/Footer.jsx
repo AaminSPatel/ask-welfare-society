@@ -33,7 +33,7 @@ export default function Footer() {
                 <FooterLink href="/committee" text="Committee" />
                 <FooterLink href="/activities" text="Activities" />
                 <FooterLink href="/exam" text="Exam" />
-                <FooterLink href="/adni" text="Exam" />
+                <FooterLink href="/admin" text="Exam" />
               </ul>
             </div>
   
