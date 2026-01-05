@@ -12,10 +12,10 @@ export default function QuestionCard({ question:allQuestion, currentAnswer, onAn
 
   const handleSubmit = async () => {
     if (selectedOption !== null) {
-      onAnswerSelect(selectedOption + 1)
+      onAnswerSelect(selectedOption)
       console.log('handlesubmit cliked');
 
-      await onSubmit(selectedOption + 1)
+      await onSubmit(selectedOption)
       setSelectedOption(null)
 
     }

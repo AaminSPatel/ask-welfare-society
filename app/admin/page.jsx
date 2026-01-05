@@ -6,11 +6,10 @@ import { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import AdminHeader from "@/components/admin/AdminHeader"
 import { useAsk } from "@/lib/askContext"
-import { useAdminAuth } from "@/lib/useAdminAuth"
 
 export default function AdminDashboard() {
   const router = useRouter()
-  const { exams, candidates, results, fetchExams, fetchCandidates, fetchResults } = useAsk()
+  const { user, isInitialized, exams, candidates, results, fetchExams, fetchCandidates, fetchResults } = useAsk()
   const [statsLoaded, setStatsLoaded] = useState(false)
 
   const fetchStats = useCallback(async () => {
@@ -27,15 +26,12 @@ export default function AdminDashboard() {
     }
   }, [fetchExams, fetchCandidates, fetchResults])
 
-  // Use the admin auth hook for authentication checking
-  const { authChecked, isAuthorized } = useAdminAuth()
-
   // Fetch stats when authentication is confirmed
   useEffect(() => {
-    if (authChecked && isAuthorized && !statsLoaded) {
+    if (user && isInitialized && !statsLoaded) {
       fetchStats()
     }
-  }, [authChecked, isAuthorized, statsLoaded, fetchStats])
+  }, [user, isInitialized, statsLoaded, fetchStats])
 
   const stats = {
     totalExams: exams?.length || 0,
@@ -43,13 +39,13 @@ export default function AdminDashboard() {
     totalResults: results?.length || 0,
   }
 
-  if (!authChecked || !statsLoaded) {
+  if (!isInitialized || !statsLoaded) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">
-            {!authChecked ? "Verifying authentication..." : "Loading dashboard data..."}
+            {!isInitialized ? "Initializing..." : "Loading dashboard data..."}
           </p>
         </div>
       </div>

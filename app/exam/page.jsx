@@ -372,9 +372,10 @@ export default function ExamPage() {
     alignItems: 'center', 
     padding: '0.5rem', 
     justifyContent: 'center', 
-    color: '#fd845f', 
+    color: '#fd5453', 
     fontWeight: '600', 
-    fontSize: '1.06rem' 
+    fontSize: '1.06rem' ,
+
   }}
 >
   Ahle Sarzami Khidmat-E-Kaum Welfare Society
