@@ -26,9 +26,12 @@ export default function Navigation() {
             <motion.div 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className={`w-12 h-12 rounded-xl flex items-center justify-center ${scrolled ? 'bg-gradient-to-r from-emerald-600 to-green-600' : 'bg-gradient-to-r from-amber-400 to-yellow-400'}`}
+              className={`w-12 h-12 rounded-xl flex items-center justify-center`}
             >
-              <span className="font-bold text-white text-lg">ASK</span>
+             {/*  <span className="font-bold text-white text-lg">ASK</span>
+              */} <img src="/logo.png" alt="Ahle Sarzami Khidmat-E-Kaum Welfare Society Logo" 
+              className="rounded-xl"
+              />
             </motion.div>
             <div>
               <h1 className={`text-lg font-bold ${scrolled ? 'text-emerald-800' : 'text-white'}`}>
